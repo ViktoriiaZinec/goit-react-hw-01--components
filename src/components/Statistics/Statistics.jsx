@@ -15,11 +15,11 @@ function dependColor(color) {
 
   const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
 
-  if (luma < 90) {
+  if (luma < 190) {
     // pick a different colour
     return '#ffffff';
   }
-  return '#000000';
+  return '#464141';
 }
 
 const StatItem = props => {
@@ -28,7 +28,7 @@ const StatItem = props => {
   // const backColor = '#00000f';
 
   const fontColor = dependColor(backColor);
-  console.log('backColor :>> ', backColor);
+  // console.log('backColor :>> ', backColor);
   return (
     <li
       style={{
@@ -36,7 +36,6 @@ const StatItem = props => {
         color: fontColor,
       }}
       className={css.item}
-      key={props.stat.id}
     >
       <span className={css.label}>{props.stat.label}</span>
       <span className={css.percentage}>{props.stat.percentage}</span>
@@ -52,7 +51,7 @@ export const Statistics = ({ title, stats }) => {
       </div>
       <ul className={css.stat_list}>
         {stats.map(stat => (
-          <StatItem stat={stat}></StatItem>
+          <StatItem key={stat.id} stat={stat}></StatItem>
         ))}
       </ul>
     </section>
